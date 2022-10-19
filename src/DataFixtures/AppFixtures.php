@@ -27,8 +27,6 @@ class AppFixtures extends Fixture
                     ->setMessage($this->faker->text());
             $manager->persist($contact);
         }
-       
-
         $manager->flush();
     }
 }
