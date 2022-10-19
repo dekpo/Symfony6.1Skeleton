@@ -11,7 +11,7 @@ use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class ContactController extends AbstractController
 {
@@ -32,12 +32,16 @@ class ContactController extends AbstractController
            $manager->persist($contact);
            $manager->flush();
         /// Sending an email
-            $email = (new Email())
+            $email = (new TemplatedEmail())
             ->from($contact->getEmail())
             ->to('admin@localhost')
             ->subject($contact->getSubject())
             ->text($contact->getMessage())
-            ->html('<p>'.$contact->getMessage().'</p>');
+            ->htmlTemplate('email/contact.html.twig')
+        /// Pass variables to the twig template
+            ->context([
+                'contact' => $contact
+            ]);
 
             $mailer->send($email);
 

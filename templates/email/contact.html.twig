@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>New Templated Email</title>
+    </head>
+    <style>
+    h1{
+        color:red;
+    }
+    h2{
+        color:purple;
+    }
+    </style>
+    <body>
+       <h1>Nouveau formulaire de contact de {{ contact.fullName }}</h1>
+       <h2>Voici son message</h2>
+       <p>{{ contact.message }}</p>
+    </body>
+</html>
