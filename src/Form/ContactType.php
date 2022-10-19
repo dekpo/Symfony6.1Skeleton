@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 class ContactType extends AbstractType
 {
@@ -56,6 +58,11 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mb-2'
                 ]
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'contact',
+                'locale' => 'fr',
             ])
             ->add('submit',SubmitType::class, [
                 'attr' => [
