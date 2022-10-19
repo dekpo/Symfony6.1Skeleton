@@ -6,6 +6,11 @@
 
 <div class="container">
     <h1>Formulaire de contact !</h1>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
     {{ form(form) }}
 </div>
 {% endblock %}
